@@ -1,0 +1,30 @@
+{
+  "name": "workmotion-vue",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bootstrap-4-grid": "^3.4.0",
+    "core-js": "^3.15.1",
+    "nuxt": "^2.15.7",
+    "sass-loader": "10.1.1",
+    "vue": "^2.6.14",
+    "vuetify": "^2.6.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.12.2",
+    "@vue/test-utils": "^1.2.1",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^27.0.5",
+    "jest": "^27.0.5",
+    "sass": "^1.44.0",
+    "vue-jest": "^3.0.4"
+  }
+}

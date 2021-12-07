@@ -1,0 +1,30 @@
+.dropdown {
+    background: #ffffff;
+    box-shadow: 0px 0px 48px rgba(141, 151, 158, 0.1);
+    border-radius: 8px;
+    position: relative;
+    bottom: 110px;
+
+    .row {
+        padding-top: 20px;
+        justify-content: center;
+    }
+    ::v-deep.v-input__slot {
+        box-shadow: none !important;
+        border: 1px solid #eff0f5;
+        box-sizing: border-box;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #00826e;
+        border-radius: 8px;
+        font-size: 14px;
+        height: 38px;
+        width: 163px;
+        color: #ffffff;
+    }
+}
