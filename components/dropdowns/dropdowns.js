@@ -13,6 +13,7 @@ export default {
         }
     },
     methods: {
+        
         getJobs() {
             axios.get('http://34.68.200.24/index.php/category_positions').then((response) => {
                 this.jobs = response.data.list.map(x => ({ name: x.positionName, id: x.id }))
