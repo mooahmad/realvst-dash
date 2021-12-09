@@ -1,3 +1,4 @@
+
 .footer {
     position: relative;
     bottom: 0px;
@@ -11,4 +12,79 @@
         background-size: 100% 100%;
         
     }
+    @media(max-width:768px){
+        background: url("../../../assets/footer/responsive.png");
+        width: 100%;
+        background-size: 100% 100%;
+        height: 100%;
+        font-size: 14px;
+        padding: 60px 11px 0px 9px;
+    }
+    .cont {
+        position: relative;
+        top: 30%;
+        .social {
+            margin-top: 24px;
+
+            .img {
+             margin-right: 24px !important;
+                
+            }
+        }
+        p.address {
+            margin-top: 24px;
+            // font-family: Archivo;
+            font-style: normal;
+            font-weight: 500;
+            // font-family: "Archivo";
+            line-height: 1.3;
+            color: #f8f8fa;
+        }
+        .title {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 16px;
+            margin-bottom: 12px;
+            margin-top: 0px;
+            @media(max-width:768px){
+                margin-bottom: 7px;
+
+            }
+        }
+        .desc {
+            color: #ffffff;
+            font-weight: 500;
+            // font-size: 16px;
+            width: 150px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .rowTwo {
+            margin-top: 30px;
+            @media(max-width:768px){
+                position: relative;
+                margin-top: 24px;
+                bottom: 15px;
+            }
+            .descTwo {
+                color: #ffffff;
+                font-weight: normal;
+                // font-size: 16px;
+                margin-bottom: 8px;
+                cursor: pointer;
+            }
+            button.btn {
+                width: 188px;
+                height: 47px;
+                background-color: #efeb6a;
+                border-radius: 8px;
+                color: #064946;
+                font-weight: bold;
+                // font-size: 16px;
+                outline: 0;
+                border: 1px solid #efeb6a;
+            }
+        }
+    }
 }
+

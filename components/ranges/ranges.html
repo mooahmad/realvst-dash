@@ -1,0 +1,56 @@
+<div class="ranges" v-if="salaryRanges != ''">
+    <!-- {{salaryRanges.quantiles.average}} -->
+    <p>Graphic Designer Salary in {{selectedCountry.name}}</p>
+    <hr />
+    <div class="row">
+        <div class="col-12 col-sm-8">
+            <div class="radios">
+                <input v-model="radios" type="radio" value="Annual"/>
+                <label style="margin: 10px" :class="[radios === 'Annual' ? 'unactive' : 'active']"> Annual </label>
+
+                
+                <input  v-model="radios" type="radio" value="Monthly"/>
+                <label style="margin: 10px" :class="[radios === 'Monthly' ? 'unactive' : 'active']"> Monthly</label>
+              </div>
+            <div class="rangeInfo">
+                <span class="col-3" style="background: #F8936D;width: 93px;height: 52px;"></span>
+                <span class="col-3" style=" background: linear-gradient(90deg, #F8936D 16.67%, #9B87FF 100%)"></span>
+                <span class="col-3" style=" background: #9B87FF;width: 93px; height: 52px"></span>
+            </div>
+            <div class="values">
+                <div class="min">
+                    <p>10 % </p>
+                    <p>
+                        {{salaryRanges.currency}}
+                        {{ radios === 'Annual' ? salaryRanges.quantiles.q10 : Math.ceil(salaryRanges.quantiles.q10 / 12)}}K
+                    </p>
+                </div>
+                <div>
+                    <p>MEDIAN</p>
+                    <p>
+                        {{salaryRanges.currency}}
+                        {{ radios === 'Annual' ? salaryRanges.quantiles.average : Math.ceil(salaryRanges.quantiles.average / 12)}}K
+                    </p>
+                </div>
+                <div class="max">
+                    <p>90 %</p>
+                    <p>
+                        {{salaryRanges.currency}}
+                        {{radios === 'Annual' ? salaryRanges.quantiles.q90 : Math.ceil(salaryRanges.quantiles.q90 / 12)}}K
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="Styles.baseSalary">
+                <p class="month">{{radios}}</p>
+                <p class="net">
+                    {{salaryRanges.currency}}
+                    {{ radios === 'Annual' ? salaryRanges.quantiles.average : Math.ceil(salaryRanges.quantiles.average/12)}}K
+                </p>
+                <p class="avg">Average base salary</p>
+              </div>
+        </div>
+    </div>
+
+</div>

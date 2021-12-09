@@ -1,19 +1,23 @@
 import axios from "axios"
+import Ranges from '../ranges/ranges.vue'
+import Loader from '../loader/loader.vue'
 export default {
-
+    components: {
+        Ranges,
+        Loader
+    },
     data() {
         return {
-            // items: ['foo', 'bar', 'fizz', 'buzz'],
-            // // values: ['foo', 'bar'],
             selectedJob: { id: null, name: null },
             selectedCountry: { id: null, name: null },
             jobs: [],
             countries: [],
-            allJops: [],
+            salaryRanges: [],
+            loading: false
         }
     },
     methods: {
-        
+
         getJobs() {
             axios.get('http://34.68.200.24/index.php/category_positions').then((response) => {
                 this.jobs = response.data.list.map(x => ({ name: x.positionName, id: x.id }))
@@ -26,13 +30,22 @@ export default {
                 console.log(this.countries, "joppsss")
             })
         },
-        searchSalary() {
-            axios.get(`http://34.68.200.24/index.php/country/${this.selectedCountry.id}/position/${this.selectedJob.id}/advanced`)
-            .then((response) => {
-
-            console.log(this.selectedJob.id, this.selectedJob.name, "ressssssssss");
-              console.log(response,"laassttt")
-            });
+        async searchSalary() {
+            try {
+                this.loading = true
+                // console.log(this.loading,"firsstt")
+               await axios.get(`http://34.68.200.24/index.php/country/${this.selectedCountry.id}/position/${this.selectedJob.id}/advanced`)
+                    .then((response) => {
+                        this.salaryRanges = response.data
+                        // console.log(this.selectedJob.id, this.selectedJob.name, "ressssssssss");
+                        // console.log(response, "laassttt")
+                    });
+            } catch (e) {
+                console.log(e)
+            } finally {
+                this.loading = false
+                console.log(this.loading,"firsstt")
+            }
         }
     },
     mounted() {
