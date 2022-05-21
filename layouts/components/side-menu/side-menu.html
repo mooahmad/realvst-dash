@@ -1,0 +1,16 @@
+<div class="side-menu__container">
+    <div class="side-menu__content">
+        <div class="side-menu__tabs" v-for="(tab, index) in tabs" @click="tabsection= index" :class="{active: tabsection === index}">
+            <nuxt-link :to="{path:tab.link}">
+                <img :src="tab.image" />
+                <span>{{tab.name}}</span>
+            </nuxt-link>
+            
+        </div>
+        <div class="side-menu__tabs" @click="logOut">
+            <img src="../../../assets/images/sidemenu-images/logOut.png" />
+            <span>Logout</span>
+        </div>
+    </div>
+
+</div>

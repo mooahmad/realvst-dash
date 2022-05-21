@@ -1,3 +1,3 @@
-<template src="@/page-src/salary-recomendation/salary-recomendation.html"></template>
-<script src="@/page-src/salary-recomendation/salary-recomendation"></script>
-<style lang="scss" src="@/page-src/salary-recomendation/salary-recomendation.scss" scoped></style>
+<template src="@/page-src/login/login.html"></template>
+<script src="@/page-src/login/login"></script>
+<style lang="scss" src="@/page-src/login/login.scss" scoped></style>

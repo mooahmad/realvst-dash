@@ -1,8 +1,12 @@
-import Footer from '../components/footer/footer.vue';
-import MainHeader from '../components/main-header/main-header.vue'
+import Header from '../components/header/header.vue'
+import SideMenu from '../components/side-menu/side-menu.vue'
 export default{
     components:{
-        Footer,
-        MainHeader
-    }
+        Header,
+        SideMenu
+    },
+
+   mounted(){
+       console.log(this.$route.path,"nameee")
+   }
 }

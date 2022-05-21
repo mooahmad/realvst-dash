@@ -1,7 +1,8 @@
 {
-  "name": "workmotion-vue",
+  "name": "dashboard",
   "version": "1.0.0",
   "private": true,
+
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -16,6 +17,7 @@
     "nuxt": "^2.15.7",
     "sass-loader": "10.1.1",
     "vue": "^2.6.14",
+    "vuelidate": "^0.7.7",
     "vuetify": "^2.6.1"
   },
   "devDependencies": {

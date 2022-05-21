@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'workmotion-vue',
+    title: 'dashboard',
     htmlAttrs: {
       lang: 'en'
     },
@@ -24,6 +24,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/vuetify',
+    '@/plugins/vuelidate',
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

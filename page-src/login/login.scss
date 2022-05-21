@@ -1,0 +1,68 @@
+.login {
+    .img {
+        .image {
+            img {
+                width: 100%;
+                height: 646px;
+
+            }
+        }
+        @media(max-width:768px) {
+            display: none;
+        }
+    }
+
+
+    .login__form {
+        display: flex;
+        justify-content: center;
+        margin-top: 100px;
+
+        .login__firstTitle {
+            color: #B9897E;
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 0px;
+        }
+
+        .login__secTitle {
+            color: #8B564A;
+            font-weight: 500;
+            font-size: 24px;
+        }
+
+        ::v-deep .v-input__slot {
+            width: 312px;
+            min-height: 38px;
+            border: 1px solid #E4EBFC;
+            outline: 0;
+            border-radius: 8px;
+        }
+
+        ::v-deep label.v-label {
+            top: 7px;
+        }
+
+        ::v-deep .v-input.migrate {
+            height: 45px !important;
+        }
+
+        .errorMsg {
+            color: red;
+            font-size: 13px;
+        }
+
+        button {
+            background: #FF772A;
+            border: 1px solid #FF772A;
+            color: #fff;
+            width: 312px;
+            font-weight: 500;
+            font-size: 16px;
+            min-height: 38px;
+            outline: 0;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+    }
+}

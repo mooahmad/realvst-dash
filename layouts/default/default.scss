@@ -1,0 +1,7 @@
+::v-deep .v-main__wrap{
+    display: flex !important;
+    flex-direction: row;
+    .page__content{
+        flex: 1;
+    }
+}

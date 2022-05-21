@@ -1,0 +1,94 @@
+.listing__requests {
+    margin-top: 40px;
+
+    .btns {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+
+        .btn {
+            width: 114px;
+            height: 34px;
+            background: #FF772A;
+            border-radius: 12px;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 14px;
+        }
+    }
+
+    header.v-sheet.theme--light.v-toolbar.v-toolbar--flat {
+        display: none !important;
+    }
+
+    img {
+        padding: 8px 0px;
+    }
+
+    ::v-deep thead.v-data-table-header {
+        background-color: #F9FAFF;
+        color: #181448;
+        padding: 10px 0px !important;
+        height: 70px;
+    }
+
+    ::v-deep .theme--light.v-data-table>.v-data-table__wrapper>table>tbody>tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+        background-color: #F9FAFF;
+    }
+
+    .v-input__slot {
+        border-radius: 12px !important;
+        border: 1px solid #F9FAFF;
+    }
+
+    ::v-deep .v-data-footer__icons-after {
+        color: #8B564A;
+        border-radius: 4px;
+        width: 36px;
+        height: 30px;
+        border: 1px solid #ADADAD;
+
+        i.v-icon.notranslate.mdi.mdi-chevron-right {
+            color: #8B564A !important;
+            bottom: 3px !important;
+            right: 4px !important;
+        }
+
+    }
+   
+    ::v-deep .v-data-footer__icons-before {
+        color: #8B564A;
+        border-radius: 4px;
+        width: 36px;
+        height: 30px;
+        border: 1px solid #ADADAD;
+        margin-right: 12px;
+
+        i.v-icon.notranslate.mdi.mdi-chevron-left {
+            color: #8B564A !important;
+            bottom: 3px !important;
+            right: 2px !important;
+        }
+
+    }
+
+    ::v-deep .v-data-footer__select {
+        margin-left: unset !important;
+        margin-right: 70% !important;
+        border: 1px solid #ADADAD;
+        border-radius: 6px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        height: 35px;
+        padding: 0px 7px
+    }
+
+    ::v-deep .theme--light.v-text-field>.v-input__control>.v-input__slot:before {
+        border: unset !important;
+    }
+
+    ::v-deep .v-input.v-input--hide-details.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--is-booted.v-select {
+        margin: 13px 0 13px 5px !important;
+    }
+}
