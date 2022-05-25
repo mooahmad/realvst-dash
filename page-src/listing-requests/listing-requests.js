@@ -47,10 +47,16 @@ export default {
             val || this.closeDelete()
         },
     },
+    mounted() {
+        if (!localStorage.getItem('user_token')) {
+            this.$router.push('/')
+        }
+    },
 
     created() {
         this.getRequests()
     },
+
 
     methods: {
         getRequests() {
@@ -104,6 +110,7 @@ export default {
                 this.editedIndex = -1
             })
         },
+        
 
         save() {
             if (this.editedIndex > -1) {

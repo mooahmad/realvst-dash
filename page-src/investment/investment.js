@@ -52,7 +52,11 @@ export default {
     created() {
         this.getInvestment()
     },
-
+    mounted() {
+        if (!localStorage.getItem('user_token')) {
+            this.$router.push('/')
+        }
+    },
     methods: {
         toggleTab(item){
             this.toggle = !this.toggle

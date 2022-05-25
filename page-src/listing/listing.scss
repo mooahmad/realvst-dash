@@ -84,7 +84,7 @@
         padding: 0px 7px
     }
 
-    ::v-deep span.v-chip.theme--dark.v-size--default.green {
+    ::v-deep .theme--light.v-chip:not(.v-chip--active) {
         color: green !important;
         background-color: unset !important;
     }

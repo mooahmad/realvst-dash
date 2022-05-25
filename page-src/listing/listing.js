@@ -48,7 +48,11 @@ export default {
             val || this.closeDelete()
         },
     },
-
+    mounted() {
+        if (!localStorage.getItem('user_token')) {
+            this.$router.push('/')
+        }
+    },
     created() {
         // this.initialize()
         this.getListing()
@@ -80,12 +84,16 @@ export default {
 
             }
         },
+
+        goToList() {
+            this.$router.push('/createList')
+        },
         getColor(status) {
-            if (status == 'Active' ) return 'green'
+            if (status == 'Acitve') return 'green'
             else if (status == 'DRAFT') return 'orange'
             else if (status == 'SOLD') return 'blue'
             else if (status == 'EXPIRED') return 'Grey'
-          },
+        },
         editItem(item) {
             this.editedIndex = this.listing.indexOf(item)
             this.editedItem = Object.assign({}, item)

@@ -2,9 +2,16 @@
     <div class="btns">
         <div></div>
         <div>
-            <button class="btn">Add Admin</button>
+            <v-dialog v-model="dialog" max-width="500px">
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn  dark class="mb-2 btn" v-bind="attrs" v-on="on">
+                    Add Admin
+                </v-btn>
+            </template>
+            </v-dialog>
         </div>
     </div>
+
     <v-data-table :headers="headers" :items-per-page="6" :items="users" sort-by="calories" class="elevation-1"
         :footer-props="{'items-per-page-text':'Show'}">
         <template v-slot:item.image="{ item }">
@@ -15,7 +22,7 @@
         <template v-slot:top>
             <v-toolbar flat>
                 <v-dialog v-model="dialog" max-width="500px">
-
+                    
                     <v-card>
                         <v-card-title>
                             <span class="text-h5">{{ formTitle }}</span>

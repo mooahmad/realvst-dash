@@ -2,7 +2,7 @@
     <div class="btns">
         <div></div>
         <div>
-            <button class="btn">Create listing</button>
+            <button @click="goToList" class="btn">Create listing</button>
         </div>
     </div>
     <v-data-table :headers="headers" :items-per-page="6" :items="listing" sort-by="calories" class="elevation-1"  :footer-props="{'items-per-page-text':'Show'}">
@@ -73,11 +73,8 @@
                 </v-dialog>
             </v-toolbar>
         </template>
-        <template v-slot:item.status="{ item }">
-            <v-chip
-              :color="getColor(item.status)"
-              dark
-            >
+        <template v-slot:item.status="{item}">
+            <v-chip :color="getColor(item.status)">
               {{ item.status }}
             </v-chip>
           </template>
@@ -89,13 +86,6 @@
                 mdi-delete
             </v-icon>
         </template>
-        <template v-slot:no-data>
-            <v-btn color="primary" @click="initialize">
-                Reset
-            </v-btn>
-        </template>
-       
-      
     </v-data-table>
 
 </div>

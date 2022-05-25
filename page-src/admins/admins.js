@@ -4,7 +4,7 @@ export default {
         dialog: false,
         dialogDelete: false,
         headers: [
-            { text: "", value: 'photos' },
+            { text: "", value: 'image' },
             { text: 'Admin ID', value: 'id' },
             { text: 'Admin name', value: 'property_name' },
             { text: 'Admin type', value: 'property_type' },
@@ -46,6 +46,12 @@ export default {
         dialogDelete(val) {
             val || this.closeDelete()
         },
+    },
+
+    mounted() {
+        if (!localStorage.getItem('user_token')) {
+            this.$router.push('/')
+        }
     },
 
     created() {

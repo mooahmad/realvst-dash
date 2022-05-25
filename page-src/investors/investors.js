@@ -47,9 +47,14 @@ export default {
             val || this.closeDelete()
         },
     },
-
+    mounted() {
+        if (!localStorage.getItem('user_token')) {
+            this.$router.push('/')
+        }
+    },
     created() {
         this.getInvestors()
+
     },
 
     methods: {
@@ -57,13 +62,13 @@ export default {
             try {
                 console.log(this.$v)
                 axios.get('http://34.125.158.199/admin/investors', {
-                    headers:{
-                        Authorization : `Bearer ${localStorage.user_token}`
+                    headers: {
+                        Authorization: `Bearer ${localStorage.user_token}`
                     }
 
                 }).then((response) => {
                     this.investors = response.data.data
-                    console.log(response,"investorsss")
+                    console.log(response, "investorsss")
 
                 })
 

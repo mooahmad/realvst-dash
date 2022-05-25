@@ -3,7 +3,7 @@
     <Header />
 
     <v-main  class="hz-contain default__main-content">
-        <SideMenu v-if="$route.path != '/'"/>
+        <SideMenu v-if="$route.path != '/' && $route.path != '/createList' "/>
         <div class="page__content">
             <nuxt />
         </div>
