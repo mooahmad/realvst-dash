@@ -1,21 +1,20 @@
 .listing__requests {
     margin-top: 40px;
 
-    .btns {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
+    input[type="text"] {
+        border: 1px solid #E4EBFC;
+        border-radius: 12px;
+        width: 208px;
+        height: 40px;
+        margin-bottom: 25px;
+        outline: 0;
+        padding-left: 37px;
+    }
 
-        .btn {
-            width: 114px;
-            height: 34px;
-            background: #FF772A;
-            border-radius: 12px;
-            color: #ffffff;
-            font-weight: 500;
-            font-size: 14px;
-        }
+    ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #7E95C6;
+        font-size: 12px;
     }
     img{
         width: 100px;

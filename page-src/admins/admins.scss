@@ -16,6 +16,21 @@
             font-weight: 500;
             font-size: 14px;
         }
+        input[type="text"] {
+            border: 1px solid #E4EBFC;
+            border-radius: 12px;
+            width: 208px;
+            height: 40px;
+            margin-bottom: 25px;
+            outline: 0;
+            padding-left: 37px;
+        }
+    
+        ::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #7E95C6;
+            font-size: 12px;
+        }
     }
 
     header.v-sheet.theme--light.v-toolbar.v-toolbar--flat {
@@ -24,6 +39,8 @@
 
     img {
         padding: 8px 0px;
+        width: 100px;
+
     }
 
     ::v-deep thead.v-data-table-header {
@@ -31,9 +48,6 @@
         color: #181448;
         padding: 10px 0px !important;
         height: 70px;
-    }
-    img{
-        width: 100px;
     }
 
     ::v-deep .theme--light.v-data-table>.v-data-table__wrapper>table>tbody>tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {

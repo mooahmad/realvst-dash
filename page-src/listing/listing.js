@@ -15,6 +15,7 @@ export default {
 
         ],
         listing: [],
+        searchData: '',
         editedIndex: -1,
         editedItem: {
             id: '',
@@ -38,6 +39,11 @@ export default {
         formTitle() {
             return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
         },
+        findListing() {
+            return this.listing.filter(x => {
+                return x.property_name.toLowerCase().includes(this.searchData.toLowerCase())
+            })
+        }
     },
 
     watch: {
@@ -106,8 +112,23 @@ export default {
             this.dialogDelete = true
         },
 
-        deleteItemConfirm() {
-            this.listing.splice(this.editedIndex, 1)
+        async deleteItemConfirm() {
+            const id = this.listing.splice(this.editedIndex, 1)
+            console.log(id[0].id, "deleteddiddd")
+            try {
+                await axios.get(`http://34.125.158.199/admin/listings/${id[0].id}/delete`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.user_token}`
+                    }
+
+                }).then((response) => {
+                    // this.investors = response.data.data
+                    console.log(response, "delet")
+
+                })
+            } catch (e) {
+                console.log(e)
+            }
             this.closeDelete()
         },
 

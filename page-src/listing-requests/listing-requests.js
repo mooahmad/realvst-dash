@@ -14,6 +14,7 @@ export default {
             { text: 'Actions', value: 'actions', sortable: false },
         ],
         requests: [],
+        searchData:'',
         editedIndex: -1,
         editedItem: {
             id: '',
@@ -37,6 +38,11 @@ export default {
         formTitle() {
             return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
         },
+        findData(){
+            return this.requests.filter(x =>{
+                return x.property_name.toLowerCase().includes(this.searchData.toLowerCase())
+            })
+        }
     },
 
     watch: {
@@ -63,13 +69,13 @@ export default {
             try {
                 console.log(this.$v)
                 axios.get('http://34.125.158.199/admin/requests', {
-                    headers:{
-                        Authorization : `Bearer ${localStorage.user_token}`
+                    headers: {
+                        Authorization: `Bearer ${localStorage.user_token}`
                     }
 
                 }).then((response) => {
-                    this.requests= response.data.data
-                    console.log(response,"requestss")
+                    this.requests = response.data.data
+                    console.log(response, "requestss")
 
                 })
 
@@ -77,7 +83,7 @@ export default {
 
             }
         },
-       
+
         editItem(item) {
             this.editedIndex = this.requests.indexOf(item)
             this.editedItem = Object.assign({}, item)
@@ -90,8 +96,22 @@ export default {
             this.dialogDelete = true
         },
 
-        deleteItemConfirm() {
-            this.requests.splice(this.editedIndex, 1)
+        async deleteItemConfirm() {
+            const id = this.requests.splice(this.editedIndex, 1)
+            console.log(id[0].id, "deleteddiddd")
+            try {
+                await axios.get(`http://34.125.158.199/admin/requests/${id[0].id}/delete`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.user_token}`
+                    }
+
+                }).then((response) => {
+                    console.log(response, "delet")
+
+                })
+            } catch (e) {
+                console.log(e)
+            }
             this.closeDelete()
         },
 
@@ -110,7 +130,7 @@ export default {
                 this.editedIndex = -1
             })
         },
-        
+
 
         save() {
             if (this.editedIndex > -1) {

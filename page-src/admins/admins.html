@@ -1,18 +1,22 @@
 <div class="admin container">
     <div class="btns">
-        <div></div>
+        <div>
+            <img src="../../assets/images/search.png" alt="search"
+                style="position: absolute; padding: 12px 4px 0px 16px; width: unset;">
+            <input v-model="searchData" type="text" placeholder="Investor name" class="search" />
+        </div>
         <div>
             <v-dialog v-model="dialog" max-width="500px">
-            <template v-slot:activator="{ on, attrs }">
-                <v-btn  dark class="mb-2 btn" v-bind="attrs" v-on="on">
-                    Add Admin
-                </v-btn>
-            </template>
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn dark class="mb-2 btn" v-bind="attrs" v-on="on">
+                        Add Admin
+                    </v-btn>
+                </template>
             </v-dialog>
         </div>
     </div>
 
-    <v-data-table :headers="headers" :items-per-page="6" :items="users" sort-by="calories" class="elevation-1"
+    <v-data-table :headers="headers" :items-per-page="6" :items="findListing" sort-by="calories" class="elevation-1"
         :footer-props="{'items-per-page-text':'Show'}">
         <template v-slot:item.image="{ item }">
             <div class="p-2">
@@ -22,7 +26,7 @@
         <template v-slot:top>
             <v-toolbar flat>
                 <v-dialog v-model="dialog" max-width="500px">
-                    
+
                     <v-card>
                         <v-card-title>
                             <span class="text-h5">{{ formTitle }}</span>

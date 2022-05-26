@@ -13,7 +13,8 @@ export default {
             { text: 'Listings', value: 'listings' },
             { text: 'Actions', value: 'actions', sortable: false },
         ],
-        investors: [],
+        searchData:'',
+             investors: [],
         editedIndex: -1,
         editedItem: {
             id: 0,
@@ -37,6 +38,11 @@ export default {
         formTitle() {
             return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
         },
+        findData(){
+            return this.investors.filter(x =>{
+                return x.name.toLowerCase().includes(this.searchData.toLowerCase())
+            })
+        }
     },
 
     watch: {
@@ -83,14 +89,30 @@ export default {
             this.dialog = true
         },
 
-        deleteItem(item) {
+        async deleteItem(item) {
             this.editedIndex = this.investors.indexOf(item)
-            this.editedItem = Object.assign({}, item)
+            // this.editedItem = Object.assign({}, item)
             this.dialogDelete = true
         },
 
-        deleteItemConfirm() {
-            this.investors.splice(this.editedIndex, 1)
+       async deleteItemConfirm() {
+
+            const id = this.investors.splice(this.editedIndex, 1)
+            console.log(id[0].id,"deleteddiddd")
+            try {
+                await axios.get(`http://34.125.158.199/admin/investors/${id[0].id}/delete`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.user_token}`
+                    }
+
+                }).then((response) => {
+                    // this.investors = response.data.data
+                    console.log(response, "delet")
+
+                })
+            } catch (e) {
+                console.log(e)
+            }
             this.closeDelete()
         },
 

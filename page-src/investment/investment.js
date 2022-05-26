@@ -6,7 +6,7 @@ export default {
         headers: [
             { text: "", value: 'image' },
             { text: 'Listing ID', value: 'listing_id' },
-            { text: 'Investors name', value: 'name' },
+            { text: 'Investors name', value: 'investor_name' },
             { text: 'Income', value: 'income' },
             { text: 'Price', value: 'price' },
             { text: 'Requested on', value: 'request_on' },
@@ -14,11 +14,12 @@ export default {
             { text: 'Actions', value: 'actions', sortable: false },
         ],
         investments: [],
+        searchData:'',
         toggle:false,
         editedIndex: -1,
         editedItem: {
             listing_id: 0,
-            name: '',
+            investor_name: '',
             income: 0,
             price: 0,
             request_on: 0,
@@ -26,7 +27,7 @@ export default {
         },
         defaultItem: {
             listing_id: 0,
-            name: '',
+            investor_name: '',
             income: 0,
             price: 0,
             request_on: 0,
@@ -38,6 +39,11 @@ export default {
         formTitle() {
             return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
         },
+        findData(){
+            return this.investments.filter(x =>{
+                return x.investor_name.toLowerCase().includes(this.searchData.toLowerCase())
+            })
+        }
     },
 
     watch: {
@@ -87,13 +93,27 @@ export default {
         },
 
         deleteItem(item) {
-            this.editedIndex = this.desserts.indexOf(item)
+            this.editedIndex = this.investments.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialogDelete = true
         },
 
-        deleteItemConfirm() {
-            this.desserts.splice(this.editedIndex, 1)
+       async deleteItemConfirm() {
+            const id = this.investments.splice(this.editedIndex, 1)
+            console.log(id[0].id, "deleteddiddd")
+            try {
+                await axios.get(`http://34.125.158.199/admin/investment-requests/${id[0].id}/delete`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.user_token}`
+                    }
+
+                }).then((response) => {
+                    console.log(response, "delet")
+
+                })
+            } catch (e) {
+                console.log(e)
+            }
             this.closeDelete()
         },
 

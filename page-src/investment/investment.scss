@@ -6,7 +6,22 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 30px;
-
+        
+        input[type="text"] {
+            border: 1px solid #E4EBFC;
+            border-radius: 12px;
+            width: 208px;
+            height: 40px;
+            margin-bottom: 25px;
+            outline: 0;
+            padding-left: 37px;
+        }
+    
+        ::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #7E95C6;
+            font-size: 12px;
+        }
         .btnWrapp {
             display: flex;
             align-items: baseline;
@@ -49,6 +64,7 @@
 
     img {
         padding: 8px 0px;
+        width: 100px;
     }
 
     ::v-deep thead.v-data-table-header {

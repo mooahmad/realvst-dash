@@ -1,6 +1,10 @@
 <div class="investment container">
     <div class="btns">
-        <div></div>
+        <div>
+            <img src="../../assets/images/search.png" alt="search"
+                style="position: absolute; padding: 12px 4px 0px 16px; width: unset;">
+            <input v-model="searchData" type="text" placeholder="Investor name" class="search" />
+        </div>
         <div class="btnWrapp">
             <div style="display: flex; align-items: baseline;">
                 <p class="requests"></p><span>Requests</span>
@@ -13,7 +17,7 @@
             </div>
         </div>
     </div>
-    <v-data-table :headers="headers" :items-per-page="3" :items="investments" sort-by="calories" class="elevation-1"
+    <v-data-table :headers="headers"  :items=" findData" sort-by="calories" class="elevation-1"
         :footer-props="{'items-per-page-text':'Show'}">
         <template v-slot:item.image="{ item }">
             <div class="p-2">
@@ -88,9 +92,9 @@
                 
             </div>
             <div v-if="toggle"> -->
-                <v-icon small @click="deleteItem(item)">
-                    mdi-delete
-                </v-icon>
+            <v-icon small @click="deleteItem(item)">
+                mdi-delete
+            </v-icon>
             <!-- </div> -->
 
         </template>

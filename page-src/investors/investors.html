@@ -1,5 +1,10 @@
 <div class="investors container">
-    <v-data-table :headers="headers" :items="investors" :items-per-page="6" class="elevation-1" :footer-props="{'items-per-page-text':'Show'}">
+    <img src="../../assets/images/search.png" alt="search" style="position: absolute; padding: 12px 4px 0px 16px; width: unset;">
+    <input v-model="searchData" type="text" placeholder="Investor name" class="search"/>
+
+    <v-data-table :headers="headers" :items="findData"  class="elevation-1"
+        :footer-props="{'items-per-page-text':'Show'}">
+
         <template v-slot:item.image="{ item }">
             <div class="p-2">
                 <img :src="item.image" :alt="item.name" />
@@ -19,23 +24,26 @@
                                 <v-row>
                                     <v-col cols="12">
                                         <p style="margin-bottom: 8px;">Admin type</p>
-                                        <v-select  :items="investors"  item-text="name"
-                                        item-value="fat"  v-model="editedItem" solo label="Select type"></v-select>
+                                        <v-select :items="investors" item-text="name" item-value="fat"
+                                            v-model="editedItem" solo label="Select type"></v-select>
                                         <!-- <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field> -->
                                     </v-col>
                                     <v-col cols="12">
                                         <p style="margin-bottom: 8px;">Admin name</p>
-                                        <v-text-field v-model="editedItem.calories" solo label="Enter name"></v-text-field>
+                                        <v-text-field v-model="editedItem.calories" solo label="Enter name">
+                                        </v-text-field>
                                     </v-col>
                                     <v-col cols="12">
                                         <p style="margin-bottom: 8px;">Admin email address</p>
-                                        <v-text-field v-model="editedItem.fat" solo label="Enter address"></v-text-field>
+                                        <v-text-field v-model="editedItem.fat" solo label="Enter address">
+                                        </v-text-field>
                                     </v-col>
                                     <!-- <v-col cols="12" sm="6" md="4">
                                         <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
                                     </v-col> -->
                                     <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
+                                        <v-text-field v-model="editedItem.protein" label="Protein (g)">
+                                        </v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -70,6 +78,6 @@
                 mdi-delete
             </v-icon>
         </template>
-       
+
     </v-data-table>
 </div>
