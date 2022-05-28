@@ -8,33 +8,42 @@ export default {
             { text: 'Admin ID', value: 'id' },
             { text: 'Admin name', value: 'name' },
             { text: 'Admin type', value: 'role_name' },
-            { text: 'Listings', value: 'location' },
+            { text: 'Admin email', value: 'email' },
             { text: 'Access', value: 'permissions', sortable: false },
             { text: 'Actions', value: 'actions', sortable: false },
 
         ],
         users: [],
-        searchData:'',
+        searchData: '',
+        selected: [],
+        checkbox1: true,
+        roles: [],
+        permesion: [],
+        accessData: null,
+        checkbox2: false,
         editedIndex: -1,
         editedItem: {
             id: '',
             name: '',
             role_name: '',
-            location: '',
-            permissions: '',
+            email: '',
+            permissions: [],
         },
         defaultItem: {
             id: '',
             name: '',
             role_name: '',
-            location: '',
-            permissions: '',
+            email: '',
+            permissions: [],
         },
     }),
 
     computed: {
         formTitle() {
             return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+        },
+        changeBtnsTitles(){
+            this.formTitle === 'New Item' ?  'Create' : 'Save Changes'
         },
         findListing() {
             return this.users.filter(x => {
@@ -60,13 +69,28 @@ export default {
 
     created() {
         this.getListing()
+        try {
+            axios.get('http://34.125.158.199/admin/users/add-admin', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.user_token}`
+                }
+
+            }).then((response) => {
+                this.roles = response.data.data.roles
+                this.permesion = response.data.data.permissions
+                console.log(this.permesion, "this.permesion")
+                console.log(this.roles, response, "access")
+            })
+
+        } catch (e) {
+
+        }
     },
 
 
     methods: {
         getListing() {
             try {
-                console.log(this.$v)
                 axios.get('http://34.125.158.199/admin/users', {
                     headers: {
                         Authorization: `Bearer ${localStorage.user_token}`
@@ -75,11 +99,6 @@ export default {
                 }).then((response) => {
                     this.users = response.data.data
                     console.log(response, "users")
-                    const status = this.listing.map(x => x.status)
-                    console.log(status, "stuss")
-                    if (status == 'Active') {
-                        status[0].style.color = "green"
-                    }
 
                 })
 
@@ -136,8 +155,31 @@ export default {
                 this.editedIndex = -1
             })
         },
+        changeSelect() {
+            console.log(this.selected, this.permissions, this.permesion, "changeee")
+        },
+        async save() {
+            var postData = {
+                "email": this.editedItem.email,
+                "role_id": this.editedItem.id,
+                "permission_ids": this.editedItem.permissions,
+                "name": this.editedItem.name,
+            };
+            try {
+                await axios.post(`http://34.125.158.199/admin/users/create-admin`, postData, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.user_token}`
+                    }
 
-        save() {
+                }).then((response) => {
+                    console.log(response, "createee")
+
+                })
+                console.log(this.editItem, "editt")
+            } catch (e) {
+                console.log(e)
+            }
+
             if (this.editedIndex > -1) {
                 Object.assign(this.users[this.editedIndex], this.editedItem)
             } else {

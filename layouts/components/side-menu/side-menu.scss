@@ -47,9 +47,14 @@
         }
     }
 
-    .side-menu__tabs:last-child {
+
+    .side-menu__userData{
         position: absolute;
         bottom: 9%;
         left: 4%;
+        p{
+            margin-bottom: 0px;
+        }
+        span{color: #457AED;}
     }
 }

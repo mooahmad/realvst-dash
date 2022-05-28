@@ -27,6 +27,8 @@ export default {
                     this.loginData = response.data
                     // localStorage.user_token =  this.loginData.access_token
                     localStorage.setItem('user_token', this.loginData.access_token)
+                    localStorage.user_name =  this.loginData.user.name
+                    localStorage.user_role =  this.loginData.user.role_name
                     this.emailError = this.loginData?.email[0],
                     this.passError = this.loginData?.password[0]
 
@@ -40,6 +42,12 @@ export default {
 
                 this.check = true
             }
+        }
+    },
+
+    mounted(){
+        if(localStorage.getItem('user_token')){
+            this.$router.push('/investors')
         }
     }
 }

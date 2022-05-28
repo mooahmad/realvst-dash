@@ -10,7 +10,9 @@ export default {
                 { name: 'Admins', image: require('../../../assets/images/sidemenu-images/admins.png'), link: 'admins' }
 
             ],
-            bucket: 'http://localhost:3000'
+            bucket: 'http://localhost:3000',
+            userName:'',
+            userRole:''
         }
     },
     methods: {
@@ -21,6 +23,8 @@ export default {
         }
     },
     mounted() {
+        this.userName = localStorage.user_name
+        this.userRole = localStorage.user_role
         if (window.location.href.indexOf("investors") > -1)
             this.tabsection = 0;
         else if (window.location.href.indexOf("listing") > -1)

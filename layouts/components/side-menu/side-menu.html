@@ -7,9 +7,15 @@
             </nuxt-link>
             
         </div>
-        <div class="side-menu__tabs" @click="logOut">
-            <img src="../../../assets/images/sidemenu-images/logOut.png" />
-            <span>Logout</span>
+        
+        
+        <div class="side-menu__userData">
+            <div class="side-menu__tabs" @click="logOut">
+                <img src="../../../assets/images/sidemenu-images/logOut.png" />
+                <p>Logout</p>
+            </div>
+            <span>{{userRole}}</span> 
+            <span>{{userName}}</span> 
         </div>
     </div>
 
