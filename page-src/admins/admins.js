@@ -28,6 +28,7 @@ export default {
             role_name: '',
             email: '',
             permissions: [],
+            role_id: ''
         },
         defaultItem: {
             id: '',
@@ -35,6 +36,7 @@ export default {
             role_name: '',
             email: '',
             permissions: [],
+            role_id: ''
         },
     }),
 
@@ -42,8 +44,8 @@ export default {
         formTitle() {
             return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
         },
-        changeBtnsTitles(){
-            this.formTitle === 'New Item' ?  'Create' : 'Save Changes'
+        changeBtnsTitles() {
+            this.formTitle === 'New Item' ? 'Create' : 'Save Changes'
         },
         findListing() {
             return this.users.filter(x => {
@@ -158,34 +160,84 @@ export default {
         changeSelect() {
             console.log(this.selected, this.permissions, this.permesion, "changeee")
         },
+
         async save() {
             var postData = {
                 "email": this.editedItem.email,
-                "role_id": this.editedItem.id,
+                "role_id": this.editedItem.role_id,
                 "permission_ids": this.editedItem.permissions,
                 "name": this.editedItem.name,
             };
-            try {
-                await axios.post(`http://34.125.158.199/admin/users/create-admin`, postData, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.user_token}`
-                    }
-
-                }).then((response) => {
-                    console.log(response, "createee")
-
-                })
-                console.log(this.editItem, "editt")
-            } catch (e) {
-                console.log(e)
-            }
 
             if (this.editedIndex > -1) {
-                Object.assign(this.users[this.editedIndex], this.editedItem)
+                const id = this.users.splice(this.editedIndex, 1)
+                console.log(id[0].id, "edit")
+                try {
+                    await axios.put(`http://34.125.158.199/admin/users/update-admin/${id[0].id}`, postData, {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.user_token}`
+                        }
+
+                    }).then((response) => {
+                        console.log(response, "edittee")
+
+                    })
+                    console.log(this.editItem, "editt")
+                } catch (e) {
+                    console.log(e)
+                }
+                this.close()
+                // Object.assign(this.users[this.editedIndex], this.editedItem)
+
             } else {
+                try {
+                    await axios.post(`http://34.125.158.199/admin/users/create-admin`, postData, {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.user_token}`
+                        }
+
+                    }).then((response) => {
+                        console.log(response, "createee")
+
+                    })
+                    console.log(this.editItem, "editt")
+                } catch (e) {
+                    console.log(e)
+                }
                 this.users.push(this.editedItem)
             }
             this.close()
         },
+
+
+        // async save() {
+        //     var postData = {
+        //         "email": this.editedItem.email,
+        //         "role_id": this.editedItem.role_id,
+        //         "permission_ids": this.editedItem.permissions,
+        //         "name": this.editedItem.name,
+        //     };
+        //     try {
+        //         await axios.post(`http://34.125.158.199/admin/users/create-admin`, postData, {
+        //             headers: {
+        //                 Authorization: `Bearer ${localStorage.user_token}`
+        //             }
+
+        //         }).then((response) => {
+        //             console.log(response, "createee")
+
+        //         })
+        //         console.log(this.editItem, "editt")
+        //     } catch (e) {
+        //         console.log(e)
+        //     }
+
+        //     if (this.editedIndex > -1) {
+        //         Object.assign(this.users[this.editedIndex], this.editedItem)
+        //     } else {
+        //         this.users.push(this.editedItem)
+        //     }
+        //     this.close()
+        // },
     },
 }
