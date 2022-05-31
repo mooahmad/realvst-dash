@@ -22,13 +22,16 @@ export default {
         accessData: null,
         checkbox2: false,
         editedIndex: -1,
+        validateInput: false,
         editedItem: {
             id: '',
             name: '',
             role_name: '',
             email: '',
             permissions: [],
-            role_id: ''
+            role_id: '',
+            current_permssions:[],
+            current_role:{}
         },
         defaultItem: {
             id: '',
@@ -36,8 +39,12 @@ export default {
             role_name: '',
             email: '',
             permissions: [],
-            role_id: ''
+            role_id: '',
+            current_permssions:[],
+            current_role:{}
         },
+        edittIconn:[],
+        editRole:{}
     }),
 
     computed: {
@@ -110,9 +117,29 @@ export default {
         },
 
 
-        editItem(item) {
+        async editItem(item) {
             this.editedIndex = this.users.indexOf(item)
-            this.editedItem = Object.assign({}, item)
+            // this.editedItem = Object.assign({}, item)
+            // const id = this.users[.indexOf(item)]
+            console.log(item, "startttedit")
+            try {
+                await axios.get(`http://34.125.158.199/admin/users/get-admin/${item.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.user_token}`
+                    }
+
+                }).then((response) => {
+                    console.log(response, "starttteditres")
+                    this.editedItem = Object.assign({}, response.data.data)
+                    this.edittIconn = this.editedItem.current_permssions.map(x=>x.id)
+                    this.editRole = this.editedItem.current_role.id
+                    console.log(this.editedItem , "start*****")
+
+                })
+            } catch (e) {
+                console.log(e)
+            }
+            // this.editedItem = Object.assign({}, item)
             this.dialog = true
         },
 
@@ -164,14 +191,20 @@ export default {
         async save() {
             var postData = {
                 "email": this.editedItem.email,
-                "role_id": this.editedItem.role_id,
-                "permission_ids": this.editedItem.permissions,
+                "role_id": this.editRole,
+                "permission_ids": this.edittIconn,
                 "name": this.editedItem.name,
             };
+
+            if (this.editRole == '' || this.editedItem.email == '' || this.edittIconn == '' || this.editedItem.name == '') {
+                this.validateInput = true
+                return
+            }
 
             if (this.editedIndex > -1) {
                 const id = this.users.splice(this.editedIndex, 1)
                 console.log(id[0].id, "edit")
+
                 try {
                     await axios.put(`http://34.125.158.199/admin/users/update-admin/${id[0].id}`, postData, {
                         headers: {
@@ -179,15 +212,15 @@ export default {
                         }
 
                     }).then((response) => {
+                        Object.assign(this.users[this.editedIndex], response.data.data)
                         console.log(response, "edittee")
 
                     })
-                    console.log(this.editItem, "editt")
                 } catch (e) {
                     console.log(e)
                 }
+                this.getListing()
                 this.close()
-                // Object.assign(this.users[this.editedIndex], this.editedItem)
 
             } else {
                 try {

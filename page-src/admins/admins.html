@@ -37,23 +37,28 @@
                                     <v-col cols="12">
                                         <p style="margin-bottom: 8px; color: #181448;">Admin type</p>
                                         <v-select :items="roles" item-text="name" item-value="id"
-                                            v-model="editedItem.role_id" solo label="Select type"></v-select>
+                                            v-model="editRole" solo label="Select type"></v-select>
+                                            <span v-if="editedItem.role_id && editedItem.role_id == '' || validateInput == true" style=" color: red; font-size: 12px;">Please select type</span>
                                         <!-- <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field> -->
                                     </v-col>
                                     <v-col cols="12">
                                         <p style="margin-bottom: 8px; color: #181448;">Admin name</p>
                                         <v-text-field v-model="editedItem.name" solo label="Enter name">
                                         </v-text-field>
+                                        <span v-if="editedItem.name && editedItem.name == '' || validateInput == true" style=" color: red; font-size: 12px;">Please enter name</span>
                                     </v-col>
                                     <v-col cols="12">
                                         <p style="margin-bottom: 8px; color: #181448;">Admin email address</p>
                                         <v-text-field v-model="editedItem.email" solo label="Enter email">
                                         </v-text-field>
+                                        <span v-if="editedItem.email && editedItem.email == '' || validateInput == true" style=" color: red; font-size: 12px;">Please enter email</span>
                                     </v-col>
                                     <v-col cols="12">
                                         <p style="margin-bottom: 8px; color: #181448;">Admin permissions</p>
+                                        <span v-if="editedItem.permissions && editedItem.permissions == '' || validateInput == true" style=" color: red; font-size: 12px;">Please select permesion</span>
+                                        
                                         <div v-for="(access,index) in permesion" :key="permesion[index].name">
-                                            <v-checkbox light :label="access.name" :value="access.id" v-model="editedItem.permissions"
+                                            <v-checkbox light :label="access.name" :value="access.id" v-model="edittIconn"
                                                 @change="changeSelect">
                                             </v-checkbox>
                                         </div>
