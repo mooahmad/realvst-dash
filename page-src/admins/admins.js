@@ -30,8 +30,8 @@ export default {
             email: '',
             permissions: [],
             role_id: '',
-            current_permssions:[],
-            current_role:{}
+            current_permssions: [],
+            current_role: {}
         },
         defaultItem: {
             id: '',
@@ -40,11 +40,14 @@ export default {
             email: '',
             permissions: [],
             role_id: '',
-            current_permssions:[],
-            current_role:{}
+            current_permssions: [],
+            current_role: {}
         },
-        edittIconn:[],
-        editRole:{}
+        edittIconn: [],
+        editRole: {},
+        emailExist: '',
+        nameExist: '',
+        persmisionExist: ''
     }),
 
     computed: {
@@ -131,9 +134,9 @@ export default {
                 }).then((response) => {
                     console.log(response, "starttteditres")
                     this.editedItem = Object.assign({}, response.data.data)
-                    this.edittIconn = this.editedItem.current_permssions.map(x=>x.id)
+                    this.edittIconn = this.editedItem.current_permssions.map(x => x.id)
                     this.editRole = this.editedItem.current_role.id
-                    console.log(this.editedItem , "start*****")
+                    console.log(this.editedItem, "start*****")
 
                 })
             } catch (e) {
@@ -196,10 +199,7 @@ export default {
                 "name": this.editedItem.name,
             };
 
-            if (this.editRole == '' || this.editedItem.email == '' || this.edittIconn == '' || this.editedItem.name == '') {
-                this.validateInput = true
-                return
-            }
+
 
             if (this.editedIndex > -1) {
                 const id = this.users.splice(this.editedIndex, 1)
@@ -213,9 +213,23 @@ export default {
 
                     }).then((response) => {
                         Object.assign(this.users[this.editedIndex], response.data.data)
-                        console.log(response, "edittee")
+                        this.emailExist = response.data?.email[0]
+                        this.nameExist = response.data?.name[0]
+                        this.persmisionExist = response.data?.permission_ids[0]
+                        console.log(this.emailExist, "this.emailExist")
 
                     })
+                   
+                    if (this.emailExist != '') {
+                        // alert(this.emailExist)
+                        return
+                    } else if (this.nameExist != '') {
+                        // alert(this.nameExist)
+                        return
+                    } else {
+                        alert()
+                        return
+                    }
                 } catch (e) {
                     console.log(e)
                 }
@@ -223,6 +237,10 @@ export default {
                 this.close()
 
             } else {
+                if (this.editRole == '' || this.editedItem.email == '' || this.edittIconn == '' || this.editedItem.name == '' && this.emailExist != '' && this.nameExist != '') {
+                    alert('Please fill all inputs')
+                    return
+                }
                 try {
                     await axios.post(`http://34.125.158.199/admin/users/create-admin`, postData, {
                         headers: {

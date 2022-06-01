@@ -55,6 +55,11 @@
         background-color: #F9FAFF;
     }
 
+    ::v-deep.v-text-field.v-text-field--enclosed .v-text-field__details {
+     display: none !important;
+        // height: 60px !important;
+    }
+
     .v-input__slot {
         border-radius: 12px !important;
         border: 1px solid #F9FAFF;
@@ -101,7 +106,7 @@
         height: 35px;
         padding: 0px 7px
     }
-   
+
     ::v-deep .theme--light.v-text-field>.v-input__control>.v-input__slot:before {
         border: unset !important;
     }
