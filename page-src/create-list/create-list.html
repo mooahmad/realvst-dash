@@ -7,10 +7,11 @@
             <p style="color: #457AED; font-weight: 500;">Property overview</p>
 
             <p style="margin-bottom: 8px; color: #181448;">Property type</p>
-            <v-select :items="items" label="Select type" v-model="Property_type" solo></v-select>
+            <v-select :items="cities" label="Select type" v-model="Property_type" solo item-text="name"
+                item-value="code"></v-select>
 
             <p style="margin-bottom: 8px; color: #181448;">Location</p>
-            <v-select :items="items" label="Select location" solo v-model="location"></v-select>
+            <v-select :items="properties" label="Select location" solo v-model="location" item-text="name" item-value="id"></v-select>
 
             <p style="margin-bottom: 8px; color: #181448;">Location on map</p>
             <v-text-field v-model="location_map" solo label="location link or coordinates"></v-text-field>
@@ -26,13 +27,16 @@
             <p style="color: #457AED; font-weight: 500;">Property specs</p>
 
             <p style="margin-bottom: 8px; color: #181448;">Number of bedrooms</p>
-            <v-select :items="items" label="Select number" v-model="Property_type" solo></v-select>
+            <v-select :items="bedrooms" label="Select number" v-model="Property_type" solo item-text="number"
+                item-value="id"></v-select>
 
             <p style="margin-bottom: 8px; color: #181448;">Number of bathrooms</p>
-            <v-select :items="items" label="Select number" solo v-model="location"></v-select>
+            <v-select :items="bathrooms" label="Select number" solo v-model="location" item-text="number"
+                item-value="id"></v-select>
 
             <p style="margin-bottom: 8px; color: #181448;">Floor number</p>
-            <v-select :items="items" label="Select floor number" solo v-model="location"></v-select>
+            <v-select :items="floors" label="Select floor number" solo v-model="location" item-text="number"
+                item-value="id"></v-select>
 
             <p style="margin-bottom: 8px; color: #181448;">Area in meter square</p>
             <v-text-field v-model="location_map" solo label="e.g. 130"></v-text-field>
@@ -49,13 +53,17 @@
 
         <div class="thirdSection">
             <p style="color: #457AED; font-weight: 500;">Amenities</p>
-
-            <v-checkbox v-model="selected" label="John" value="John"></v-checkbox>
+            <v-layout row wrap>
+                <v-flex v-for="(item,index) in amenities" :key="amenities[index].name" xs6>
+                  <v-checkbox light :label="item.name" :value="item.code" v-model="edittIconn">
+                  </v-checkbox>
+                </v-flex>
+          </v-layout>
         </div>
 
         <div class="thirdSection">
             <p style="color: #457AED; font-weight: 500;">Photos of property</p>
-            <p style="color: #000000; font-sixe:14px">Please provide clear photos. At least 4 photos.</p>
+            <p style="color: #000000; font-size:14px">Please provide clear photos. At least 4 photos.</p>
             <v-file-input accept="image/*" label="Upload your image" prepend-icon="mdi-image" multiple color="blue"
                 v-model="files" @change="addFiles" solo>
                 <template v-slot:selection="{ text }">
@@ -77,13 +85,14 @@
             <!-- <input type="image "src="../../assets/images/media.png" v-model="files" @change="addFiles" />  -->
             <row sm="4" v-for="(file,f) in files" :key="f">
                 <!-- {{file.name}} -->
-                <img :ref="'file'" src="//placehold.it/400/99cc77" class="img-fluid" :title="'file' + f" style="width: 50px;" />
+                <img :ref="'file'" src="//placehold.it/400/99cc77" class="img-fluid" :title="'file' + f"
+                    style="width: 50px;" />
             </row>
         </div>
 
         <div class="fourthSection">
             <p style="color: #457AED; font-weight: 500;">Attachments</p>
-            <p style="color: #000000; font-sixe:14px">Please provide floor plan if available</p>
+            <p style="color: #000000; font-size:14px">Please provide floor plan if available</p>
             <v-file-input v-model="newFiles" counter multiple placeholder="Select your files"
                 prepend-icon="mdi-paperclip" solo :show-size="1000">
                 <template v-slot:selection="{ text }">

@@ -1,3 +1,4 @@
+import axios from 'axios'
 export default {
   data: () => ({
     Property_type: null,
@@ -9,6 +10,12 @@ export default {
     files: [],
     newFiles: [0],
     readers: [],
+    cities: [],
+    bedrooms: [],
+    bathrooms: [],
+    floors: [],
+    amenities: [],
+    properties: []
   }),
   methods: {
     addFiles() {
@@ -27,7 +34,32 @@ export default {
       })
     },
   },
+
+  created() {
+    try {
+      axios.get('http://34.125.158.199/listing/get-create-list', {
+        headers: {
+          Authorization: `Bearer ${localStorage.user_token}`
+        }
+
+      }).then((response) => {
+        this.cities = response.data.data.cities
+        this.bedrooms = response.data.data.bedrooms
+        this.bathrooms = response.data.data.bathrooms
+        this.floors = response.data.data.floors
+        this.amenities = response.data.data.amenities
+        this.properties = response.data.data.properties
+        console.log(response, "createe")
+
+      })
+
+    } catch (e) {
+
+    }
+  },
   mounted() {
+
+
     // var fileupload = document.getElementById("FileUpload1");
     // var filePath = document.getElementById("spnFilePath");
     // var image = document.getElementById("imgFileUpload");
