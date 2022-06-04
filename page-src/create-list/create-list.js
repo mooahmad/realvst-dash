@@ -31,7 +31,8 @@ export default {
     finishing_types: [],
     newwimageee: [],
     pushedImages: [],
-    afterCreate: ''
+    afterCreate: '',
+    flag:false
   }),
   methods: {
     createListing() {
@@ -71,15 +72,17 @@ export default {
 
         }).then((response) => {
           console.log(response, "created success")
-          console.log(formData, "ListingData222")
           this.afterCreate = response.data
-          if (this.afterCreate === 'Listing is created Successfuly'){
-            this.$router.push('/listing')
-          }
+          
         })
-
+        if (this.afterCreate === 'Listing is created Successfuly'){
+          this.$router.push('/listing')
+        }else{
+          this.flag = true
+        }
         
       } catch (e) {
+       
       }
     },
     addFiles() {
