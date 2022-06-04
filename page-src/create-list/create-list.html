@@ -11,68 +11,71 @@
                 item-value="code"></v-select>
 
             <p style="margin-bottom: 8px; color: #181448;">Location</p>
-            <v-select :items="properties" label="Select location" solo v-model="location" item-text="name" item-value="id"></v-select>
+            <v-select :items="properties" label="Select location" solo v-model="location" item-text="name"
+                item-value="id"></v-select>
 
             <p style="margin-bottom: 8px; color: #181448;">Location on map</p>
             <v-text-field v-model="location_map" solo label="location link or coordinates"></v-text-field>
 
             <p style="margin-bottom: 8px; color: #181448;">Unit price</p>
-            <v-text-field v-model="unit_price" solo label="e.g. 3,000,000"></v-text-field>
+            <v-text-field v-model="price" solo label="e.g. 3,000,000"></v-text-field>
 
             <p style="margin-bottom: 8px; color: #181448;">Property description</p>
-            <textarea placeholder="Tell us about the property" class="area"></textarea>
+            <textarea placeholder="Tell us about the property" class="area" v-model="Property_desc"></textarea>
         </div>
 
         <div class="secSection">
             <p style="color: #457AED; font-weight: 500;">Property specs</p>
 
             <p style="margin-bottom: 8px; color: #181448;">Number of bedrooms</p>
-            <v-select :items="bedrooms" label="Select number" v-model="Property_type" solo item-text="number"
-                item-value="id"></v-select>
+            <v-select :items="bedrooms" label="Select number" v-model="beds" solo item-text="number" item-value="id">
+            </v-select>
 
             <p style="margin-bottom: 8px; color: #181448;">Number of bathrooms</p>
-            <v-select :items="bathrooms" label="Select number" solo v-model="location" item-text="number"
-                item-value="id"></v-select>
+            <v-select :items="bathrooms" label="Select number" solo v-model="bath" item-text="number" item-value="id">
+            </v-select>
 
             <p style="margin-bottom: 8px; color: #181448;">Floor number</p>
-            <v-select :items="floors" label="Select floor number" solo v-model="location" item-text="number"
+            <v-select :items="floors" label="Select floor number" solo v-model="floor_number" item-text="number"
                 item-value="id"></v-select>
 
             <p style="margin-bottom: 8px; color: #181448;">Area in meter square</p>
-            <v-text-field v-model="location_map" solo label="e.g. 130"></v-text-field>
+            <v-text-field solo label="e.g. 130" v-model="area"></v-text-field>
 
             <p style="margin-bottom: 8px; color: #181448;">Land area</p>
-            <v-text-field v-model="unit_price" solo label="e.g. 130"></v-text-field>
+            <v-text-field v-model="land" solo label="e.g. 130"></v-text-field>
 
             <p style="margin-bottom: 8px; color: #181448;">Built up area</p>
-            <v-text-field v-model="unit_price" solo label="e.g. 130"></v-text-field>
+            <v-text-field v-model="built_up_area" solo label="e.g. 130"></v-text-field>
 
             <p style="margin-bottom: 8px; color: #181448;">Finishing type</p>
-            <v-select :items="items" label="Select type" solo v-model="location"></v-select>
+            <v-select :items="finishing_types" label="Select type" solo v-model="finishing" item-text="type"
+                item-value="id"></v-select>
+
         </div>
 
         <div class="thirdSection">
             <p style="color: #457AED; font-weight: 500;">Amenities</p>
             <v-layout row wrap>
                 <v-flex v-for="(item,index) in amenities" :key="amenities[index].name" xs6>
-                  <v-checkbox light :label="item.name" :value="item.code" v-model="edittIconn">
-                  </v-checkbox>
+                    <v-checkbox light :label="item.name" :value="item.code" v-model="anim">
+                    </v-checkbox>
                 </v-flex>
-          </v-layout>
+            </v-layout>
         </div>
 
         <div class="thirdSection">
             <p style="color: #457AED; font-weight: 500;">Photos of property</p>
             <p style="color: #000000; font-size:14px">Please provide clear photos. At least 4 photos.</p>
             <v-file-input accept="image/*" label="Upload your image" prepend-icon="mdi-image" multiple color="blue"
-                v-model="files" @change="addFiles" solo>
+                v-model="files" @change="addFiles" solo value="files">
                 <template v-slot:selection="{ text }">
                     <v-chip color="blue" dark label small>
                         {{ text }}
                     </v-chip>
                 </template>
             </v-file-input>
-
+            <!-- {{files[0].name}} -->
 
 
 
@@ -90,6 +93,7 @@
             </row>
         </div>
 
+        
         <div class="fourthSection">
             <p style="color: #457AED; font-weight: 500;">Attachments</p>
             <p style="color: #000000; font-size:14px">Please provide floor plan if available</p>
@@ -107,7 +111,7 @@
             </v-file-input>
         </div>
         <div style="text-align: end; margin-bottom: 20px;">
-            <button>CREATE LISTING</button>
+            <button @click="createListing">CREATE LISTING</button>
 
         </div>
     </div>
