@@ -1,18 +1,10 @@
 import axios from 'axios'
-// import vue2Dropzone from 'vue2-dropzone'
-// import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
 export default {
-  // components: {
-  //   vueDropzone: vue2Dropzone
-  // },
+
   data: () => ({
-    //   dropzoneOptions: {
-    //     url: 'https://httpbin.org/post',
-    //     thumbnailWidth: 150,
-    //     maxFilesize: 0.5,
-    //     headers: { "My-Awesome-Header": "header value" }
-    // },
-    Property_type: null,
+
+    property_type: null,
     location: null,
     location_map: null,
     unit_price: null,
@@ -37,30 +29,41 @@ export default {
     amenities: [0],
     properties: [],
     finishing_types: [],
-    newwimageee:[],
-    pushedImages:[]
+    newwimageee: [],
+    pushedImages: [],
+    afterCreate: ''
   }),
   methods: {
     createListing() {
-      var ListingData = {
-        "attach": this.newFiles,
-        "image_ids": this.files,
-        "property_type": this.Property_type,
-        "location": this.location,
-        "property_description": this.Property_desc,
-        "price": this.price,
-        "bedrooms": this.beds,
-        "bathrooms": this.bath,
-        "floor_number": this.floor_number,
-        "area": this.area,
-        "land": this.land,
-        "built_up_area": this.built_up_area,
-        "amenities": this.anim,
-        "finishing_type": this.finishing
-      };
-      console.log(ListingData, "ListingData111")
+
+      var formData = new FormData();
+      formData.append("property_type", this.Property_type);
+      formData.append("location", this.location);
+      formData.append("property_description", this.Property_desc);
+      formData.append("price", this.price);
+      formData.append("bedrooms", this.beds);
+      formData.append("bathrooms", this.bath);
+      formData.append("floor_number", this.floor_number);
+      formData.append("bathrooms", this.bath);
+      formData.append("area", this.area);
+      formData.append("land", this.land);
+      formData.append("built_up_area", this.built_up_area);
+      formData.append("finishing_type", this.finishing);
+
+      for (const i of Object.keys(this.anim)) {
+        formData.append('amenities[]', this.anim[i])
+      }
+
+      for (const i of Object.keys(this.files)) {
+        formData.append('image_ids[]', this.files[i])
+      }
+      for (const i of Object.keys(this.newFiles)) {
+        formData.append('attach[]', this.newFiles[i])
+      }
+
+
       try {
-        axios.post('http://34.125.158.199/admin/listings/create-listing', ListingData, {
+        axios.post('http://34.125.158.199/admin/listings/create-listing', formData, {
           headers: {
             Authorization: `Bearer ${localStorage.user_token}`,
             'Content-Type': 'multipart/form-data'
@@ -68,20 +71,17 @@ export default {
 
         }).then((response) => {
           console.log(response, "created success")
-          console.log(ListingData, "ListingData222")
-
-
+          console.log(formData, "ListingData222")
+          this.afterCreate = response.data
+          if (this.afterCreate === 'Listing is created Successfuly'){
+            this.$router.push('/listing')
+          }
         })
-        console.log(ListingData, "ListingData333")
 
-
+        
       } catch (e) {
       }
     },
-
-
-
-
     addFiles() {
       // console.log('files', this.files)
       this.files.forEach((file, f) => {
@@ -95,7 +95,7 @@ export default {
           console.log(fileData, "filee")
           // send to server here...
         }
-       this.readers[f].readAsDataURL(this.files[f]);
+        this.readers[f].readAsDataURL(this.files[f]);
       })
       // this.pushedImages.push(this.files)
       // console.log(this.files,"fileess")
@@ -106,7 +106,6 @@ export default {
   },
 
   created() {
-    console.log(this.$refs.dropzoneElement, "refss")
     try {
       axios.get('http://34.125.158.199/listing/get-create-list', {
         headers: {
