@@ -44,6 +44,6 @@ export default {
   build: {
     transpile: [/^vuetify/],
   } ,
-  target: 'serverless'
+  target: 'static'
 
 }
