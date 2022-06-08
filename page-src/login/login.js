@@ -19,7 +19,7 @@ export default {
         logIn() {
             try {
                 console.log(this.$v)
-                axios.post('http://34.125.158.199/auth/login', {
+                axios.post('http://moo.marsworkers.com/realvst/public/index.php/auth/login', {
                     "email": this.email,
                     "password": this.password
 
