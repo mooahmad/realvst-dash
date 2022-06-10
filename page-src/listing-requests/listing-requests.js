@@ -68,7 +68,7 @@ export default {
         getRequests() {
             try {
                 console.log(this.$v)
-                axios.get('http://34.125.158.199/admin/requests', {
+                axios.get('https://web.marsworkers.com/admin/requests', {
                     headers: {
                         Authorization: `Bearer ${localStorage.user_token}`
                     }
@@ -100,7 +100,7 @@ export default {
             const id = this.requests.splice(this.editedIndex, 1)
             console.log(id[0].id, "deleteddiddd")
             try {
-                await axios.get(`http://34.125.158.199/admin/requests/${id[0].id}/delete`, {
+                await axios.get(`https://web.marsworkers.com/admin/requests/${id[0].id}/delete`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.user_token}`
                     }

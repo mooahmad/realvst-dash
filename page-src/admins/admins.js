@@ -82,7 +82,7 @@ export default {
     created() {
         this.getListing()
         try {
-            axios.get('http://34.125.158.199/admin/users/add-admin', {
+            axios.get('https://web.marsworkers.com/admin/users/add-admin', {
                 headers: {
                     Authorization: `Bearer ${localStorage.user_token}`
                 }
@@ -103,7 +103,7 @@ export default {
     methods: {
         getListing() {
             try {
-                axios.get('http://34.125.158.199/admin/users', {
+                axios.get('https://web.marsworkers.com/admin/users', {
                     headers: {
                         Authorization: `Bearer ${localStorage.user_token}`
                     }
@@ -126,7 +126,7 @@ export default {
             // const id = this.users[.indexOf(item)]
             console.log(item, "startttedit")
             try {
-                await axios.get(`http://34.125.158.199/admin/users/get-admin/${item.id}`, {
+                await axios.get(`https://web.marsworkers.com/admin/users/get-admin/${item.id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.user_token}`
                     }
@@ -156,7 +156,7 @@ export default {
             const id = this.users.splice(this.editedIndex, 1)
             console.log(id[0].id, "deleteddiddd")
             try {
-                await axios.get(`http://34.125.158.199/admin/users/${id[0].id}/delete`, {
+                await axios.get(`https://web.marsworkers.com/admin/users/${id[0].id}/delete`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.user_token}`
                     }
@@ -206,7 +206,7 @@ export default {
                 console.log(id[0].id, "edit")
 
                 try {
-                    await axios.put(`http://34.125.158.199/admin/users/update-admin/${id[0].id}`, postData, {
+                    await axios.put(`https://web.marsworkers.com/admin/users/update-admin/${id[0].id}`, postData, {
                         headers: {
                             Authorization: `Bearer ${localStorage.user_token}`
                         }
@@ -242,7 +242,7 @@ export default {
                     return
                 }
                 try {
-                    await axios.post(`http://34.125.158.199/admin/users/create-admin`, postData, {
+                    await axios.post(`https://web.marsworkers.com/admin/users/create-admin`, postData, {
                         headers: {
                             Authorization: `Bearer ${localStorage.user_token}`
                         }
@@ -269,7 +269,7 @@ export default {
         //         "name": this.editedItem.name,
         //     };
         //     try {
-        //         await axios.post(`http://34.125.158.199/admin/users/create-admin`, postData, {
+        //         await axios.post(`https://web.marsworkers.com/admin/users/create-admin`, postData, {
         //             headers: {
         //                 Authorization: `Bearer ${localStorage.user_token}`
         //             }

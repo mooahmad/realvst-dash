@@ -19,7 +19,7 @@ export default {
         logIn() {
             try {
                 console.log(this.$v)
-                axios.post('http://moo.marsworkers.com/realvst/public/index.php/auth/login', {
+                axios.post('https://web.marsworkers.com/auth/login', {
                     "email": this.email,
                     "password": this.password
 
@@ -32,11 +32,15 @@ export default {
                     this.emailError = this.loginData?.email[0],
                     this.passError = this.loginData?.password[0]
 
+                    if(response && this.email != '' && this.password != ''){
+                        this.$router.push('/investors')
+                    }else{
+                        return;
+                    }
+                
                 })
 
-                if(localStorage.getItem('user_token') && this.email != '' && this.password != ''){
-                    this.$router.push('/investors')
-                }
+               
 
             } catch (e) {
 

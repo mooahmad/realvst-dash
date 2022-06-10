@@ -70,7 +70,7 @@ export default {
         getListing() {
             try {
                 console.log(this.$v)
-                axios.get('http://34.125.158.199/admin/listings', {
+                axios.get('https://web.marsworkers.com/admin/listings', {
                     headers: {
                         Authorization: `Bearer ${localStorage.user_token}`
                     }
@@ -116,7 +116,7 @@ export default {
             const id = this.listing.splice(this.editedIndex, 1)
             console.log(id[0].id, "deleteddiddd")
             try {
-                await axios.get(`http://34.125.158.199/admin/listings/${id[0].id}/delete`, {
+                await axios.get(`https://web.marsworkers.com/admin/listings/${id[0].id}/delete`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.user_token}`
                     }
