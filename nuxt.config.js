@@ -37,7 +37,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [['bootstrap-4-grid'],
+  modules: [
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

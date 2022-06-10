@@ -30,18 +30,12 @@ export default {
                     localStorage.user_name =  this.loginData.user.name
                     localStorage.user_role =  this.loginData.user.role_name
                     this.emailError = this.loginData?.email[0],
-                    this.passError = this.loginData?.password[0]
-
-                    if(response && this.email != '' && this.password != ''){
-                        this.$router.push('/investors')
-                    }else{
-                        return;
-                    }
-                
+                    this.passError = this.loginData?.password[0]                
                 })
-
-               
-
+                if(localStorage.getItem('user_token')this.loginData && this.email != '' && this.password != ''){
+                    this.$router.push('/investors')
+                }
+    
             } catch (e) {
 
                 this.check = true

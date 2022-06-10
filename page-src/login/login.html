@@ -1,10 +1,6 @@
 <div class="login">
-    <div class="row">
-        <div class="col-6 ">
-            <div class="image "><img src="../../assets/images/loginImage.png" /> </div>
-        </div>
-
-        <div class="col-6 col-sm-6">
+    <div style="display: flex; grid-gap: 20%;">        
+            <div class="image "><img src="../../assets/images/loginImage.png" /> </div>    
             <div class="login__form">
                 <div>
                     <p class="login__firstTitle">Welcome back,</p>
@@ -13,13 +9,11 @@
                     <div class="input-label mand">Email</div>
                     <v-text-field outlined single-line class="migrate" label="enter email" v-model="email" />
                     <p class="errorMsg" >{{emailError}}</p>
-                    <!-- {{loginData}} -->
                     <div class="input-label mand">Password</div>
                     <v-text-field type="password" outlined single-line class="migrate" label="enter Password" v-model="password" />
                     <p class="errorMsg" >{{passError}}</p>
                     <button @click="logIn">Login now</button>
                 </div>
             </div>
-        </div>
     </div>
 </div>
